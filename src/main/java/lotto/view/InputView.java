@@ -3,6 +3,7 @@ package lotto.view;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.validator.NumberValidator;
 
 public class InputView {
@@ -13,9 +14,12 @@ public class InputView {
         return numberValidator.validate(getInput());
     }
 
-    public List<String> getLottoNumber() {
+    public List<Integer> getLottoNumber() {
         System.out.println("\n당첨 번호를 입력해 주세요.");
-        return Arrays.asList(getInput().split(","));
+        String input = getInput();
+        return Arrays.stream(input.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     public int getBonusNumber() {

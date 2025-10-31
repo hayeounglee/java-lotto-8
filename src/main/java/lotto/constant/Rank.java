@@ -40,4 +40,21 @@ public enum Rank {
     public int getPrize() {
         return prize;
     }
+
+    public String getDescription() {
+        switch (this) {
+            case FIRST:
+                return "6개 일치 (" + prize + "원) - ";
+            case SECOND:
+                return "5개 일치, 보너스 볼 일치 (" + prize + "원) - ";
+            case THIRD:
+                return "5개 일치 (" + prize + "원) - ";
+            case FOURTH:
+                return "4개 일치 (" + prize + "원) - ";
+            case FIFTH:
+                return "3개 일치 (" + prize + "원) - ";
+            default:
+                return "";
+        }
+    }
 }
