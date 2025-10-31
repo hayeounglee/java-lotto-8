@@ -18,6 +18,7 @@ public class LottoController {
     public void run() {
         inputView.getPurchaseAmount();
         inputView.getLottoNumber();
+        inputView.getBonusNumber();
     }
 
 }
