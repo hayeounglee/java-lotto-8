@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.List;
 import java.util.Map;
 import lotto.constant.Rank;
 import lotto.model.Bonus;
@@ -10,22 +11,27 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-    private final InputView inputView;
-    private final OutputView outputView;
+    private InputView inputView;
+    private OutputView outputView;
     private LottoService service;
 
-    public LottoController() {
-        inputView = new InputView();
-        outputView = new OutputView();
+    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.service = lottoService;
     }
 
     public void run() {
         int purchaseAmount = inputView.getPurchaseAmount();
-        UserLottos userLottos = new UserLottos(purchaseAmount);
-        Lotto lotto = new Lotto(inputView.getLottoNumber());
-        Bonus bonus = new Bonus(inputView.getBonusNumber(), lotto);
+        service.generateUserLottos(purchaseAmount);
+        outputView.printUserLotto(service.getUserLottos());
 
-        service = new LottoService(userLottos, lotto, bonus);
+        List<Integer> lottoInput = inputView.getLottoNumber();
+        Lotto lotto = new Lotto(lottoInput);
+        service.generateLotto(lotto);
+
+        int bonus = inputView.getBonusNumber();
+        service.generateBonus(bonus);
 
         Map<Rank, Long> summary = service.summarizeResults();
         double profitRate = service.calculateProfitRate(purchaseAmount);

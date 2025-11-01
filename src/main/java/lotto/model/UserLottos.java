@@ -8,6 +8,7 @@ public class UserLottos {
     private static final int LOTTO_PRICE = 1000;
 
     private List<UserLotto> userLottos;
+
     private int purchaseCount;
 
     public UserLottos(int purchaseAmount) {
@@ -41,5 +42,13 @@ public class UserLottos {
 
     private boolean containsBonusNumber(List<Integer> userNumbers, Bonus bonus) {
         return userNumbers.contains(bonus.getBonus());
+    }
+
+    public List<UserLotto> getUserLottos() {
+        return userLottos;
+    }
+
+    public int getPurchaseCount() {
+        return purchaseCount;
     }
 }

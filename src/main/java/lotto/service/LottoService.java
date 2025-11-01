@@ -16,12 +16,8 @@ public class LottoService {
     private List<Result> results;
 
     public LottoService() {
-
     }
 
-    public void generateResults() {
-        results = userLottos.countMatchingLotto(lotto, bonus);
-    }
 
     public Map<Rank, Long> summarizeResults() {
         generateResults();
@@ -34,5 +30,37 @@ public class LottoService {
                 .mapToLong(result -> result.getRank().getPrize())
                 .sum();
         return (double) totalPrize / totalPurchaseAmount * 100;
+    }
+
+    public void generateUserLottos(int purchaseAmount) {
+        userLottos = new UserLottos(purchaseAmount);
+    }
+
+    public void generateResults() {
+        results = userLottos.countMatchingLotto(lotto, bonus);
+    }
+
+    public UserLottos getUserLottos() {
+        return userLottos;
+    }
+
+    public void generateLotto(Lotto lotto) {
+        this.lotto = lotto;
+    }
+
+    public void generateBonus(int number) {
+        bonus = new Bonus(number, lotto);
+    }
+
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    public Bonus getBonus() {
+        return bonus;
+    }
+
+    public List<Result> getResults() {
+        return results;
     }
 }
