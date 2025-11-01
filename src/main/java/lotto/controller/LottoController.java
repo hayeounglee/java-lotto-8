@@ -1,11 +1,8 @@
 package lotto.controller;
 
 import java.util.List;
-import java.util.Map;
-import lotto.constant.Rank;
-import lotto.model.Bonus;
+import lotto.constant.ErrorMessage;
 import lotto.model.Lotto;
-import lotto.model.UserLottos;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -22,21 +19,50 @@ public class LottoController {
     }
 
     public void run() {
-        int purchaseAmount = inputView.getPurchaseAmount();
-        service.generateUserLottos(purchaseAmount);
+        repeatUntilPurchaseValid();
         outputView.printUserLotto(service.getUserLottos());
 
-        List<Integer> lottoInput = inputView.getLottoNumber();
-        Lotto lotto = new Lotto(lottoInput);
-        service.generateLotto(lotto);
+        repeatUntilLottoValid();
+        repeatUntilBonusValid();
 
-        int bonus = inputView.getBonusNumber();
-        service.generateBonus(bonus);
+        outputView.printResult(service.summarizeResults(), service.calculateProfitRate());
+    }
 
-        Map<Rank, Long> summary = service.summarizeResults();
-        double profitRate = service.calculateProfitRate(purchaseAmount);
+    private void repeatUntilPurchaseValid() {
+        while (true) {
+            try {
+                int purchaseAmount = inputView.getPurchaseAmount();
+                service.generateUserLottos(purchaseAmount);
+                return;
+            } catch (NumberFormatException e) {
+                System.out.println(ErrorMessage.INVALID_FORM.getMessage());
+            }
+        }
+    }
 
-        outputView.printResult(summary, profitRate);
+    private void repeatUntilLottoValid() {
+        while (true) {
+            try {
+                List<Integer> lottoInput = inputView.getLottoNumber();
+                Lotto lotto = new Lotto(lottoInput);
+                service.generateLotto(lotto);
+                return;
+            } catch (NumberFormatException e) {
+                System.out.println(ErrorMessage.INVALID_FORM.getMessage());
+            }
+        }
+    }
+
+    private void repeatUntilBonusValid() {
+        while (true) {
+            try {
+                int bonus = inputView.getBonusNumber();
+                service.generateBonus(bonus);
+                return;
+            } catch (NumberFormatException e) {
+                System.out.println(ErrorMessage.INVALID_FORM.getMessage());
+            }
+        }
     }
 
 }

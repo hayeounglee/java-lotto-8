@@ -14,53 +14,43 @@ public class LottoService {
     private Lotto lotto;
     private Bonus bonus;
     private List<Result> results;
-
-    public LottoService() {
-    }
-
+    private int purchaseAmount;
 
     public Map<Rank, Long> summarizeResults() {
-        generateResults();
+        getResult();
         return results.stream()
                 .collect(Collectors.groupingBy(Result::getRank, Collectors.counting()));
     }
 
-    public double calculateProfitRate(int totalPurchaseAmount) {
+    public void getResult() {
+        results = userLottos.countMatchingLotto(lotto, bonus);
+    }
+
+    public double calculateProfitRate() {
         long totalPrize = results.stream()
                 .mapToLong(result -> result.getRank().getPrize())
                 .sum();
-        return (double) totalPrize / totalPurchaseAmount * 100;
+        return (double) totalPrize / purchaseAmount * 100;
     }
 
     public void generateUserLottos(int purchaseAmount) {
+        this.purchaseAmount = purchaseAmount;
         userLottos = new UserLottos(purchaseAmount);
-    }
-
-    public void generateResults() {
-        results = userLottos.countMatchingLotto(lotto, bonus);
     }
 
     public UserLottos getUserLottos() {
         return userLottos;
     }
 
-    public void generateLotto(Lotto lotto) {
-        this.lotto = lotto;
+    public void generateLotto(Lotto lottoInput) {
+        lotto = lottoInput;
     }
 
-    public void generateBonus(int number) {
-        bonus = new Bonus(number, lotto);
+    public void generateBonus(int bonusInput) {
+        bonus = new Bonus(bonusInput, lotto);
     }
 
     public Lotto getLotto() {
         return lotto;
-    }
-
-    public Bonus getBonus() {
-        return bonus;
-    }
-
-    public List<Result> getResults() {
-        return results;
     }
 }
