@@ -42,17 +42,18 @@ public enum Rank {
     }
 
     public String getDescription() {
+        String formattedPrize = String.format("%,d", prize);
         switch (this) {
             case FIRST:
-                return "6개 일치 (" + prize + "원) - ";
+                return "6개 일치 (" + formattedPrize + "원) - ";
             case SECOND:
-                return "5개 일치, 보너스 볼 일치 (" + prize + "원) - ";
+                return "5개 일치, 보너스 볼 일치 (" + formattedPrize + "원) - ";
             case THIRD:
-                return "5개 일치 (" + prize + "원) - ";
+                return "5개 일치 (" + formattedPrize + "원) - ";
             case FOURTH:
-                return "4개 일치 (" + prize + "원) - ";
+                return "4개 일치 (" + formattedPrize + "원) - ";
             case FIFTH:
-                return "3개 일치 (" + prize + "원) - ";
+                return "3개 일치 (" + formattedPrize + "원) - ";
             default:
                 return "";
         }
