@@ -8,7 +8,6 @@ public class UserLottos {
     private static final int LOTTO_PRICE = 1000;
 
     private List<UserLotto> userLottos;
-
     private int purchaseCount;
 
     public UserLottos(int purchaseAmount) {

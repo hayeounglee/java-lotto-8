@@ -1,6 +1,5 @@
 package lotto.model;
 
-
 import lotto.constant.Rank;
 
 public class Result {
@@ -16,13 +15,5 @@ public class Result {
 
     public Rank getRank() {
         return rank;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public boolean hasBonus() {
-        return hasBonus;
     }
 }
