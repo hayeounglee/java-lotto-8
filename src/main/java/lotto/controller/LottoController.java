@@ -34,7 +34,7 @@ public class LottoController {
                 int purchaseAmount = inputView.getPurchaseAmount();
                 service.generateUserLottos(purchaseAmount);
                 return;
-            } catch (NumberFormatException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(ErrorMessage.INVALID_FORM.getMessage());
             }
         }
@@ -43,11 +43,10 @@ public class LottoController {
     private void repeatUntilLottoValid() {
         while (true) {
             try {
-                List<Integer> lottoInput = inputView.getLottoNumber();
-                Lotto lotto = new Lotto(lottoInput);
+                Lotto lotto = new Lotto(inputView.getLottoNumber());
                 service.generateLotto(lotto);
                 return;
-            } catch (NumberFormatException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(ErrorMessage.INVALID_FORM.getMessage());
             }
         }
@@ -59,10 +58,9 @@ public class LottoController {
                 int bonus = inputView.getBonusNumber();
                 service.generateBonus(bonus);
                 return;
-            } catch (NumberFormatException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(ErrorMessage.INVALID_FORM.getMessage());
             }
         }
     }
-
 }
