@@ -3,6 +3,7 @@ package lotto.model;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
+import lotto.validator.PurchaseAmountValidator;
 
 public class UserLottos {
     private static final int LOTTO_PRICE = 1000;
@@ -11,6 +12,9 @@ public class UserLottos {
     private int purchaseCount;
 
     public UserLottos(int purchaseAmount) {
+        PurchaseAmountValidator purchaseAmountValidator = new PurchaseAmountValidator();
+        purchaseAmountValidator.validate(purchaseAmount);
+
         userLottos = new ArrayList<>();
         purchaseCount = purchaseAmount / LOTTO_PRICE;
         generateUserLotto();

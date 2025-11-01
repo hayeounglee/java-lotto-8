@@ -1,19 +1,15 @@
 package lotto.model;
 
 import java.util.List;
+import lotto.validator.LottoValidator;
 
 public class Lotto {
     private final List<Integer> lotto;
 
     public Lotto(List<Integer> numbers) {
-        validate(numbers);
+        LottoValidator lottoValidator = new LottoValidator();
+        lottoValidator.validate(numbers);
         lotto = numbers;
-    }
-
-    private void validate(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
-        }
     }
 
     public List<Integer> getLotto() {
