@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
 import lotto.constant.ErrorMessage;
 import lotto.model.Lotto;
 import lotto.service.LottoService;

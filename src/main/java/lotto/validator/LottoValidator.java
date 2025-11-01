@@ -1,13 +1,10 @@
 package lotto.validator;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import lotto.constant.ErrorMessage;
 
 public class LottoValidator {
-    private static final String LOTTO_NUMBER_REGEX = "^\\d{1,2}(,\\d{1,2}){5}$";
-
     public void validate(List<Integer> lotto) {
         if (lotto.size() != 6) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_SIZE.getMessage());

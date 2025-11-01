@@ -1,6 +1,5 @@
 package lotto;
 
-import java.awt.desktop.OpenURIEvent;
 import lotto.controller.LottoController;
 import lotto.service.LottoService;
 import lotto.view.InputView;

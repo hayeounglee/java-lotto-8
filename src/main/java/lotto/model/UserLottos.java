@@ -7,6 +7,9 @@ import lotto.validator.PurchaseAmountValidator;
 
 public class UserLottos {
     private static final int LOTTO_PRICE = 1000;
+    private static final int MIN_RANGE = 1;
+    private static final int MAX_RANGE = 45;
+    public static final int LOTTO_NUMBER_COUNT = 6;
 
     private List<UserLotto> userLottos;
     private int purchaseCount;
@@ -22,7 +25,7 @@ public class UserLottos {
 
     private void generateUserLotto() {
         for (int i = 0; i < purchaseCount; i++) {
-            List<Integer> lottoNumber = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+            List<Integer> lottoNumber = Randoms.pickUniqueNumbersInRange(MIN_RANGE, MAX_RANGE, LOTTO_NUMBER_COUNT);
             userLottos.add(new UserLotto(lottoNumber));
         }
     }

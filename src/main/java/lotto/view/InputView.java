@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.validator.FormatValidator;
-import lotto.validator.LottoValidator;
 import lotto.validator.NumberValidator;
 
 public class InputView {
