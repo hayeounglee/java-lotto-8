@@ -1,18 +1,17 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.Map;
 import lotto.constant.Rank;
 import lotto.model.UserLotto;
 import lotto.model.UserLottos;
 
 public class OutputView {
-//    public void printUserLotto(UserLottos userLottos) {
-//        System.out.println("\n" + userLottos.getPurchaseCount() + "개를 구매했습니다.");
-//        for (UserLotto userLotto : userLottos.getUserNumbers()) {
-//            System.out.println(userLotto.getUserNumber());
-//        }
-//    }
+    public void printUserLotto(UserLottos userLottos) {
+        System.out.println("\n" + userLottos.getPurchaseCount() + "개를 구매했습니다.");
+        for (UserLotto userLotto : userLottos.getUserLottos()) {
+            System.out.println(userLotto.getUserLotto());
+        }
+    }
 
     public void printResult(Map<Rank, Long> summary, double profitRate) {
         System.out.println("\n당첨 통계\n" + "---");
