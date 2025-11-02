@@ -3,6 +3,9 @@ package lotto.model;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import lotto.constant.Rank;
 import lotto.validator.PurchaseAmountValidator;
 
 public class UserLottos {
@@ -30,14 +33,15 @@ public class UserLottos {
         }
     }
 
-    public List<Result> countMatchingLotto(Lotto lotto, Bonus bonus) {
+    public Map<Rank, Long> countMatchingLotto(Lotto lotto, Bonus bonus) {
         List<Result> results = new ArrayList<>();
         for (UserLotto userLotto : userLottos) {
             int matchingCount = countMatchingNumbers(userLotto.getUserLotto(), lotto);
             boolean hasBonusNumber = containsBonusNumber(userLotto.getUserLotto(), bonus);
             results.add(new Result(matchingCount, hasBonusNumber));
         }
-        return results;
+        return results.stream()
+                .collect(Collectors.groupingBy(Result::getRank, Collectors.counting()));
     }
 
     private int countMatchingNumbers(List<Integer> userLotto, Lotto lotto) {

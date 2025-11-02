@@ -17,13 +17,7 @@ public class LottoService {
     private int purchaseAmount;
 
     public Map<Rank, Long> summarizeResults() {
-        getResult();
-        return results.stream()
-                .collect(Collectors.groupingBy(Result::getRank, Collectors.counting()));
-    }
-
-    public void getResult() {
-        results = userLottos.countMatchingLotto(lotto, bonus);
+        return userLottos.countMatchingLotto(lotto, bonus);
     }
 
     public double calculateProfitRate() {
